@@ -1,0 +1,31 @@
+№2
+#include <stdio.h>
+#include <math.h>
+#include <time.h>
+int main(){
+ double x;
+ unsigned int n = 0;
+ printf("x: ");
+ scanf("%lf", &x);
+ printf("n: ");
+ scanf("%u", &n);
+ clock_t begin = clock();
+ double sum = 0;
+ double recursion(double x, unsigned int i){
+ double F;
+ if (i == 0){
+ F = 1;
+ } else {
+ double m = (x * x) / (4 * i * i - 2 * i);
+ F = m * recursion(x, i - 1);
+ }
+ sum += F;
+ return F;
+ }
+ double F = recursion(x, n);
+ printf("Sum = %.15lf\n", sum);
+ printf("Delta: %.15lf\n", fabs((double)(cosh(x) - sum)));
+ clock_t end = clock();
+ printf("Time: %lf seconds\n", (double)(end - begin) / CLOCKS_PER_SEC);
+ return 0;
+}
